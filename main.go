@@ -11,8 +11,8 @@ import (
 type control struct {
 	Time                time.Time
 	count               int
-	id                  int64
-	mapIdAndTimeConnect map[int64]time.Duration
+	id                  int
+	mapIdAndTimeConnect map[int]time.Duration
 	tim                 time.Timer
 }
 
@@ -72,10 +72,10 @@ func connectUser(w http.ResponseWriter, cont *control) {
 	}
 }
 
-func sortMapValue(w http.ResponseWriter, m map[int64]time.Duration) {
+func sortMapValue(w http.ResponseWriter, m map[int]time.Duration) {
 
 	type kv struct {
-		Key   int64
+		Key   int
 		Value time.Duration
 	}
 
@@ -102,7 +102,7 @@ func sortMapValue(w http.ResponseWriter, m map[int64]time.Duration) {
 
 func main() {
 	c := &control{
-		mapIdAndTimeConnect: make(map[int64]time.Duration),
+		mapIdAndTimeConnect: make(map[int]time.Duration),
 	}
 
 	http.HandleFunc("/", c.myHandler)
